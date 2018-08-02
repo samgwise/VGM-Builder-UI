@@ -1,0 +1,24 @@
+{
+  "authors" : [
+    "Sam Gillespie"
+  ],
+  "build-depends" : [ ],
+  "depends" : [
+    "ScaleVec",
+    "JSON::Fast",
+    "GTK::Simple"
+  ],
+  "description" : "blah blah blah",
+  "license" : "Artistic-2.0",
+  "name" : "App::VGMAudtionUI",
+  "perl" : "6.c",
+  "provides" : {
+    "App::VGMAudtionUI" : "lib/App/VGMAudtionUI.pm6",
+    "App::VGMAudtionUI::GTK" : "lib/App/VGMAudtionUI/GTK.pm6"
+  },
+  "resources" : [ ],
+  "source-url" : "",
+  "tags" : [ ],
+  "test-depends" : [ ],
+  "version" : "0.0.1"
+}
