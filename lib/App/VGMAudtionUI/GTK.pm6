@@ -3,6 +3,7 @@ use v6.c;
 unit class App::VGMAudtionUI::GTK;
 use GTK::Simple;
 use GTK::Simple::App;
+use App::VGMAudtionUI::GTK::PlayBar;
 
 has GTK::Simple::App $!app;
 
@@ -28,7 +29,10 @@ method start() {
 
     $!app.set-content(
         GTK::Simple::VBox.new(
-            |%!buttons.values
+            |%!buttons.values,
+            GTK::Simple::Grid.new(
+                PlayBar.new.include-gridable
+            )
         )
     );
 
