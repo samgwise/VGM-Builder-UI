@@ -27,14 +27,18 @@ method start() {
             self.stop
         });
 
+    my $player = PlayBar.new;
+
     $!app.set-content(
         GTK::Simple::VBox.new(
             |%!buttons.values,
             GTK::Simple::Grid.new(
-                PlayBar.new.include-gridable
+                $player.include-gridable
             )
         )
     );
+
+    $player.aggregate-click-events.tap( { say $_ } );
 
     $!app.run;
 }

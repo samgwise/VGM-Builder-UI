@@ -51,3 +51,22 @@ method init() {
         $b(self)
     }
 }
+
+#! Aggregate click event supplies
+method aggregate-click-events( --> Supply) {
+    my $s = self;
+    my Supplier $aggregator .= new;
+
+    for $s.^attributes -> $attr {
+        with $attr.get_value($s).?clicked {
+            .tap({ $aggregator.emit: $s.click-events($attr.name) })
+        }
+    }
+
+    $aggregator.Supply
+}
+
+#! Override to handle click events
+method click-events($command) {
+    $command
+}
