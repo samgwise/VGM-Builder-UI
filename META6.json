@@ -14,10 +14,11 @@
   "perl" : "6.c",
   "provides" : {
     "App::VGMAudtionUI" : "lib/App/VGMAudtionUI.pm6",
-    "App::VGMAudtionUI::GTK" : "lib/App/VGMAudtionUI/GTK.pm6"
+    "App::VGMAudtionUI::GTK" : "lib/App/VGMAudtionUI/GTK.pm6",
+    "App::VGMAudtionUI::GTK::Component" : "lib/App/VGMAudtionUI/GTK/Component.pm6"
   },
   "resources" : [ ],
-  "source-url" : "",
+  "source-url" : "https://github.com/samgwise/VGM-Builder-UI.git",
   "tags" : [ ],
   "test-depends" : [ ],
   "version" : "0.0.1"

@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/samgwise/VGM-Builder-UI.svg?branch=master)](https://travis-ci.org/samgwise/VGM-Builder-UI)
+
 NAME
 ====
 
