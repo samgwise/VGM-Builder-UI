@@ -38,7 +38,7 @@ method start() {
         )
     );
 
-    $player.aggregate-click-events.tap( { say $_ } );
+    $player.clicked.tap( { say $_ } );
 
     $!app.run;
 }

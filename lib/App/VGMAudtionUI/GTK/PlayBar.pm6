@@ -33,4 +33,16 @@ our class PlayBar is export does App::VGMAudtionUI::GTK::Component {
     submethod TWEAK() {
         self.init
     }
+
+    #! Override default empty event action method
+    method clicked-event-action(Str $event --> Callable) {
+        my $skip-event = self.event-prefixer.('skip');
+        given $event {
+            when 'step-forward' { -> { $skip-event, 1 } }
+            when 'skip-forward' { -> { $skip-event, 100 } }
+            when 'step-backward' { -> { $skip-event, -1 } }
+            when 'skip-backward' { -> { $skip-event, -100 } }
+            default { Callable }
+        }
+    }
 }

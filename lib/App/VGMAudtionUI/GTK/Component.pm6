@@ -52,14 +52,23 @@ method init() {
     }
 }
 
-#! Aggregate click event supplies
-method aggregate-click-events( --> Supply) {
+#! Aggregate click event supplies of all attributes implementing a clicked method
+method clicked( --> Supply) {
     my $s = self;
     my Supplier $aggregator .= new;
+    my $event-prefixer = $s.event-prefixer;
 
     for $s.^attributes -> $attr {
-        with $attr.get_value($s).?clicked {
-            .tap({ $aggregator.emit: $s.click-events($attr.name) })
+        # Collect result of clicked on any attributes which implement the method.
+        with $attr.get_value($s).?clicked -> $clicked {
+            my $event-source = $attr.name.substr(2);
+            my $event-name = $event-prefixer($event-source);
+            with $s.clicked-event-action($event-source) -> $action {
+                $clicked.tap({ $aggregator.emit: $action() })
+            }
+            else {
+                $clicked.tap({ $aggregator.emit: $($event-name, ) })
+            }
         }
     }
 
@@ -67,6 +76,20 @@ method aggregate-click-events( --> Supply) {
 }
 
 #! Override to handle click events
-method click-events($command) {
-    $command
+method clicked-event-action(Str $command --> Callable) {
+    # No action defined
+    Callable
+}
+
+#! Default implementation of event prefixing
+#! Returns the full class name by default.
+method component-event-prefix( --> Str) {
+    state $prefix = self.WHAT.^name;
+    $prefix
+}
+
+# provides a closure to prefix event names
+method event-prefixer( --> Callable) {
+    my $prefix = self.component-event-prefix;
+    sub event-prefixer(Str $event) { join '::', $prefix, $event }
 }
